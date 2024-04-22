@@ -3,10 +3,11 @@
 /**
  * list_process - prints list of proceess
  *
- * Return: no thing
+ * @type: the type of process 0 for USER 1 for SYSTEM 2 for BOTH
+ * Return: array of strings containing process information
  */
 
-void list_processes()
+char **list_processes(int type)
 {
 	char buffer[BUFFER_SIZE];
 	FILE *file = popen(
@@ -14,15 +15,35 @@ void list_processes()
 	if (!file)
 	{
 		perror("Error opening processs list");
-		return;
+		return (NULL);
 	}
-	printf("USER         PID %%CPU %%MEM    VSZ   RSS TTY      STAT START   "
-		   "TIME COMMAND\n");
+	char **processes = malloc(MAX_PROCESSES * sizeof(char *));
+	if (processes == NULL)
+	{
+		perror("Memory allocation failed");
+		return NULL;
+	}
 
+	int index = 0;
 	while (fgets(buffer, BUFFER_SIZE, file))
 	{
-		printf("%s\n", buffer);
+		processes[index] = strdup(buffer);
+		if (processes[index] == NULL)
+		{
+			perror("Memory allocation failed");
+			for (int i = 0; i < index; i++)
+			{
+				free(processes[i]);
+			}
+			free(processes);
+			return NULL;
+		}
+		index++;
 	}
 
 	pclose(file);
+
+	processes[index] = NULL;
+
+	return processes;
 }
