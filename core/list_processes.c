@@ -21,8 +21,7 @@ char **list_processes(int type)
 	char **processes = malloc(MAX_PROCESSES * sizeof(char *));
 	if (processes == NULL)
 	{
-		perror("Memory allocation failed");
-		return NULL;
+		return (NULL);
 	}
 
 	int index = 0;
@@ -31,13 +30,12 @@ char **list_processes(int type)
 		processes[index] = strdup(buffer);
 		if (processes[index] == NULL)
 		{
-			perror("Memory allocation failed");
 			for (int i = 0; i < index; i++)
 			{
 				free(processes[i]);
 			}
 			free(processes);
-			return NULL;
+			return (NULL);
 		}
 		index++;
 	}
@@ -46,5 +44,5 @@ char **list_processes(int type)
 
 	processes[index] = NULL;
 
-	return processes;
+	return (processes);
 }
