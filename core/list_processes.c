@@ -48,7 +48,6 @@ char **list_processes(int type)
 	}
 
 	pclose(file);
-
 	processes[index] = NULL;
 
 	return (processes);
