@@ -9,8 +9,11 @@
 
 
 #define BUFFER_SIZE 1024
+#define USER 0
+#define SYSTEM 1
+#define BOTH 2
 
-char **list_processes();
-char **send_signal(pid_t pid, int signal);
+char **list_processes(int type);
+int send_signal(pid_t pid, int signal);
 
 #endif
