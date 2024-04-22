@@ -1,5 +1,4 @@
 #include "core.h"
-#include <stdio.h>
 
 /**
  * list_process - prints list of proceess
@@ -9,11 +8,21 @@
 
 void list_processes()
 {
-    FILE *file = popen("ps - e -o pid,comm", "r");
-    if (!file)
-    {
-        perror("Error opening processs list");
-        return;
-    }
+	char buffer[BUFFER_SIZE];
+	FILE *file = popen(
+		"ps -e -o user,pid,%cpu,%mem,vsz,rss,tty,stat,start,time,command", "r");
+	if (!file)
+	{
+		perror("Error opening processs list");
+		return;
+	}
+	printf("USER         PID %%CPU %%MEM    VSZ   RSS TTY      STAT START   "
+		   "TIME COMMAND\n");
 
+	while (fgets(buffer, BUFFER_SIZE, file))
+	{
+		printf("%s\n", buffer);
+	}
+
+	pclose(file);
 }
