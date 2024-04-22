@@ -7,6 +7,9 @@
 #include <string.h>
 #include <unistd.h>
 
+
+#define BUFFER_SIZE 1024
+
 void list_processes();
 void send_signal();
 
