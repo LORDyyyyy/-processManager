@@ -10,7 +10,7 @@
 
 #define BUFFER_SIZE 1024
 
-void list_processes();
-void send_signal(pid_t pid, int signal);
+char **list_processes();
+char **send_signal(pid_t pid, int signal);
 
 #endif
