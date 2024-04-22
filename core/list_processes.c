@@ -18,7 +18,14 @@ char **list_processes(int type)
 		perror("Error opening processs list");
 		return (NULL);
 	}
-	char **processes = malloc(MAX_PROCESSES * sizeof(char *));
+	int number_of_process = 1;
+	while (fgets(buffer, BUFFER_SIZE, file))
+	{
+		number_of_process++;
+	}
+	fseek(file, 0, SEEK_SET);
+
+	char **processes = malloc(number_of_process * sizeof(char *));
 	if (processes == NULL)
 	{
 		return (NULL);

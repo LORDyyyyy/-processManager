@@ -9,7 +9,6 @@
 
 
 #define BUFFER_SIZE 1024
-#define MAX_PROCESSES 100
 #define USER 0
 #define SYSTEM 1
 #define BOTH 2
