@@ -16,4 +16,7 @@
 char **list_processes(int type);
 int send_signal(pid_t pid, int signal);
 
+/* helpers */
+void free_2d_array(char **arr);
+
 #endif
