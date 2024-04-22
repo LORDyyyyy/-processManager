@@ -4,6 +4,7 @@
  * list_process - prints list of proceess
  *
  * @type: the type of process 0 for USER 1 for SYSTEM 2 for BOTH
+ *
  * Return: array of strings containing process information
  */
 
