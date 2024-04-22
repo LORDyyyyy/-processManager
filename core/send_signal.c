@@ -1,22 +1,16 @@
 #include "core.h"
 
 /**
- * send_signal - send a signal to a specific process or a group of processes
+ * @brief Send a signal to a specific process or a group of processes
  *
- * @pid: the ID of the process
- * @signal: represents the signal that will be sent
- * Return: 1 if success otherwise 0
+ * @param[pid_t] pid The ID of the process
+ * @param[const int] signal The signal type that will be sent
+ * @return 1 on success, 0 otherwise
  */
-
-int send_signal(pid_t pid, int signal)
+int send_signal(pid_t pid, const int signal)
 {
 	if (!kill(pid, signal))
-	{
 		return (1);
-	}
 	else
-	{
-		perror("Error sending signal");
 		return (0);
-	}
 }

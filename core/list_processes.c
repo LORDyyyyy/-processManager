@@ -1,38 +1,46 @@
 #include "core.h"
 
 /**
- * list_process - prints list of proceess
+ * @brief Returns a list of processes
  *
- * @type: the type of process 0 for USER 1 for SYSTEM 2 for BOTH
- *
- * Return: array of strings containing process information
+ * @param[const int] type the type of the process: 0 for USER and 1 for USER and
+ * SYSTEM
+ * @return an array of strings containing process information in a table format
  */
-
-char **list_processes(int type)
+char **list_processes(const int type)
 {
 	char buffer[BUFFER_SIZE];
-	FILE *file = popen(
-		"ps -e -o user,pid,%cpu,%mem,vsz,rss,tty,stat,start,time,command", "r");
-	if (!file)
-	{
-		perror("Error opening processs list");
-		return (NULL);
-	}
-	int number_of_process = 1;
-	while (fgets(buffer, BUFFER_SIZE, file))
-	{
-		number_of_process++;
-	}
-	fseek(file, 0, SEEK_SET);
-
-	char **processes = malloc(number_of_process * sizeof(char *));
-	if (processes == NULL)
-	{
-		return (NULL);
-	}
-
+	char *tmp = " -o user,pid,%cpu,%mem,time,command";
+	char *command;
 	int index = 0;
-	while (fgets(buffer, BUFFER_SIZE, file))
+
+	switch (type)
+	{
+		case 0:
+			command = strdup("ps -U ");
+			strcat(command, getlogin());
+			strcat(command, tmp);
+			break;
+		case 1:
+			command = strdup("ps -e -o user,pid,%cpu,%mem,time,command");
+			break;
+		default:
+			return (NULL);
+	}
+
+	int number_of_process = count_process(strdup(command));
+	if (!number_of_process)
+		return (NULL);
+
+	FILE *file = popen(command, "r");
+	if (!file)
+		return (NULL);
+
+	char **processes = malloc((number_of_process + 1) * sizeof(char *));
+	if (processes == NULL)
+		return (NULL);
+
+	while (index < number_of_process && fgets(buffer, BUFFER_SIZE, file))
 	{
 		processes[index] = strdup(buffer);
 		if (processes[index] == NULL)
@@ -44,27 +52,9 @@ char **list_processes(int type)
 	}
 
 	pclose(file);
-	processes[index] = NULL;
+	free(command);
+
+	processes[number_of_process] = NULL;
 
 	return (processes);
-}
-
-
-/**
- * free_2d_array - frees a 2d arrays of char
- * @arr: the 2d array
- *
- * Return: void
- */
-void free_2d_array(char **arr)
-{
-	int i;
-
-	if (arr != NULL)
-	{
-		for (i = 0; arr[i]; i++)
-			free(arr[i]);
-		free(arr);
-		arr = NULL;
-	}
 }

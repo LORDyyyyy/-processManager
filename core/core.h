@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/types.h>
 #include <unistd.h>
 
 
@@ -13,8 +14,9 @@
 #define SYSTEM 1
 #define BOTH 2
 
-char **list_processes(int type);
-int send_signal(pid_t pid, int signal);
+char **list_processes(const int type);
+int count_process(char *command);
+int send_signal(pid_t pid, const int signal);
 
 /* helpers */
 void free_2d_array(char **arr);
