@@ -3,17 +3,18 @@
 /**
  * send_signal - send a signal to a specific process or a group of processes
  *
- * Return: no thing
+ * Return: 1 if success otherwise 0
  */
 
-void send_signal(pid_t pid, int signal)
+int send_signal(pid_t pid, int signal)
 {
 	if (!kill(pid, signal))
 	{
-		printf("Signal %d sent to process ID %d successfully.\n", signal, pid);
+		return 1;
 	}
 	else
 	{
 		perror("Error sending signal");
+		return 0;
 	}
 }
