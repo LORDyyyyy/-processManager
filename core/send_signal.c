@@ -11,6 +11,5 @@ int send_signal(pid_t pid, const int signal)
 {
 	if (!kill(pid, signal))
 		return (1);
-	else
-		return (0);
+	return (0);
 }

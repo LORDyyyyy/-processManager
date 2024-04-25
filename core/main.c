@@ -19,6 +19,5 @@ int main()
 
 	free_2d_array(arr);
 
-
 	return (0);
 }

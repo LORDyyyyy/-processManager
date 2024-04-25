@@ -9,7 +9,7 @@
 #include <unistd.h>
 
 
-#define BUFFER_SIZE 1024
+#define BUFFER_SIZE 2048
 #define USER 0
 #define SYSTEM 1
 #define BOTH 2

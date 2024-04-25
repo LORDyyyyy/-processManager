@@ -17,12 +17,11 @@ char **list_processes(const int type)
 	switch (type)
 	{
 		case 0:
-			command = strdup("ps -U ");
-			strcat(command, getlogin());
-			strcat(command, tmp);
+			asprintf(&command, "ps -U %s -o user,pid,%%cpu,%%mem,time,command",
+					 getlogin());
 			break;
 		case 1:
-			command = strdup("ps -e -o user,pid,%cpu,%mem,time,command");
+			asprintf(&command, "ps -e -o user,pid,%%cpu,%%mem,time,command");
 			break;
 		default:
 			return (NULL);
@@ -53,8 +52,9 @@ char **list_processes(const int type)
 
 	pclose(file);
 	free(command);
-
-	processes[number_of_process] = NULL;
+	
+    for (; index <= number_of_process; index++)
+		processes[index] = NULL;
 
 	return (processes);
 }
