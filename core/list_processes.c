@@ -10,7 +10,6 @@
 char **list_processes(const int type)
 {
 	char buffer[BUFFER_SIZE];
-	char *tmp = " -o user,pid,%cpu,%mem,time,command";
 	char *command;
 	int index = 0;
 
