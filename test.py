@@ -41,4 +41,4 @@ def test_list_processes():
 if __name__ == "__main__":
     """Entry Point"""
 
-    test_list_processes()
+    test_send_signal()
