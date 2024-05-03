@@ -1,11 +1,12 @@
-#include"main.h"
+#include "main.h"
 
-int main(){
+int main()
+{
 
-printf("-----------------------------------------------------\n");
-int type= typeInput();
-char **arr = list_processes(type);
-if (!arr)
+	printf("-----------------------------------------------------\n");
+	int type = typeInput();
+	char **arr = list_processes(type);
+	if (!arr)
 	{
 		printf("arr is null.\n");
 		exit(EXIT_FAILURE);
@@ -14,11 +15,8 @@ if (!arr)
 		printf("%s", arr[i]);
 
 	free_2d_array(arr);
-    printf("-------------------------------------------------------");
-    printf("select the PID and the signal type you want to perform ");
+	printf("-------------------------------------------------------");
+	printf("select the PID and the signal type you want to perform ");
 
 	return (0);
 }
-
-
-
