@@ -1,22 +1,29 @@
 #include "main.h"
-
+int get_terminal_width();
 int main()
 {
+    char choice;
+    while (1)
+    {
+        printf("-----------------------------------------------------\n");
+        int type =
+            typeInput();
+        char **arr = list_processes(type);
+        formatePrinting(arr);
 
-	printf("-----------------------------------------------------\n");
-	int type = typeInput();
-	char **arr = list_processes(type);
-	if (!arr)
-	{
-		printf("arr is null.\n");
-		exit(EXIT_FAILURE);
-	}
-	for (int i = 0; arr[i]; i++)
-		printf("%s", arr[i]);
+        int state = signalInput();
 
-	free_2d_array(arr);
-	printf("-------------------------------------------------------");
-	printf("select the PID and the signal type you want to perform ");
+        if (state)
+            printf("The signal was sent successfully\n");
 
-	return (0);
+        else
+            printf("Failed to send the signal\n\n");
+        printf("do you want to continue? (Y/N)\n");
+        scanf(" %c", &choice);
+        if (choice == 'y' || choice == 'Y')
+            continue;
+        else
+            break;
+    }
+    return 0;
 }

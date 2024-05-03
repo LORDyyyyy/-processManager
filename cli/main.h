@@ -1,10 +1,10 @@
 #ifndef MAIN_H
 #define MAIN_H
 #include "../core/core.h"
-#include <ncurses.h>
+#include <sys/ioctl.h>
+#include <unistd.h>
+int typeInput();
+int signalInput();
+void formatePrinting(char **arr);
 
-
- int typeInput();
-void signalInput();
-
-#endif //MAIN_H
+#endif // MAIN_H
