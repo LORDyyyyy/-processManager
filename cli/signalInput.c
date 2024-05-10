@@ -14,11 +14,13 @@ int signalInput()
     printf("SIGTERM\t\t\t\t\tTermination Signal : 15\n");
     printf("SIGSEGV\t\t\t\t\tSegmentation Violation : 11\n");
     printf("SIGUSR1\t\t\t\t\tUser-defined Signal 1 : 10\n");
-    printf("SIGSTOP\t\t\t\t\tStop Process : 19\n");
+    printf("SIGUSR2\t\t\t\t\tUser-defined signal 2 : 12\n");
+    printf("SIGQUIT\t\t\t\t\tQuit Process : 3\n");
+    printf("SIGCONT\t\t\t\t\tContinue executing : 18\n");
+    printf("SIGSTOP\t\t\t\t\tStop Signal : 19\n");
+    printf("SIGSTP\t\t\t\t\tTerminal stop signal : 20\n");
 	printf("select the PID and the signal type you want to perform ");
-	
     scanf("%d %d", &pid, &signal);
-    
     int state = send_signal(pid,signal);
     return state;
 }
