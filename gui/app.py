@@ -114,11 +114,12 @@ class ProcessManager():
     def do_signal(self):
         # PID input Row
         third_row_frame = tk.Frame(self.root)
-        third_row_frame.pack(pady=10)
+        third_row_frame.pack(pady=5)
 
         tk.Label(third_row_frame, text="Enter PID:").pack(side=tk.LEFT)
         self.pid_entry = tk.Entry(third_row_frame)
         self.pid_entry.pack(side=tk.LEFT)
+
 
         # Signal Type Dropdown Row
         fourth_row_frame = tk.Frame(self.root)
@@ -132,10 +133,42 @@ class ProcessManager():
         signal_dropdown['values'] = tuple(SIGNALS.keys())
         signal_dropdown.pack(side=tk.LEFT)
 
+        third_row_frame_lower= tk.Frame(self.root)
+        third_row_frame_lower.pack(pady=5)
+
+        self.error_label = tb.Label(third_row_frame_lower, bootstyle="danger", font=('', 14))
+        self.error_label.pack(side=tk.LEFT)
+
         # Send Signal Button Row
         fifth_row_frame = tk.Frame(self.root)
         fifth_row_frame.pack(pady=10)
 
         send_button = tk.Button(
-            fifth_row_frame, text="Send Signal")
+            fifth_row_frame,
+            text="Send Signal",
+            command=self.send_signal_action
+                            )
         send_button.pack()
+
+    def send_signal_action(self):
+        pid_input = self.pid_entry.get()
+
+        if not pid_input or not pid_input.isdigit():
+            self.error_label.config(text="Enter a valid PID")
+            return
+        self.error_label.config(text="")
+
+        signal = self.signal_type.get()
+
+        if signal not in SIGNALS.keys():
+            self.error_label.config(text="Select a valid signal", bootstyle="danger")
+            return
+
+        print(f"Sending signal {signal} to PID {pid_input}")
+
+        response = call_send_signal(int(pid_input), SIGNALS[signal])
+
+        if 'Error' in response.keys():
+            self.error_label.config(text=response['Error'], bootstyle="danger")
+            return
+        self.error_label.config(text="Signal sent successfully", bootstyle="success")
