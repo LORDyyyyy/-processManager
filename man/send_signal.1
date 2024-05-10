@@ -1,0 +1,50 @@
+.TH SEND_SIGNAL 1 "April 2024" "Version 1.0" "User Commands"
+
+.SH NAME
+send_signal \- send signals to processes
+
+.SH SYNOPSIS
+.B send_signal
+.RB [ \fBPID\fR ]
+.RB [ \fBsignal type\fR ]
+
+.SH DESCRIPTION
+The \fBsend_signal\fR command allows users to send signals to processes on the system.
+
+.SH OPTIONS
+
+.TP
+\fB\fIpid\fR
+Specify the Process ID (PID) of the target process.
+
+.TP
+\fB\fIsignal\fR
+Specify the signal type to send. The following signals are available:
+.br
+\fB2\fR: SIGINT (Interrupt)
+.br
+\fB3\fR: SIGQUIT (Quit)
+.br
+\fB9\fR: SIGKILL (Kill)
+.br
+\fB10\fR: SIGUSR1 (User-defined signal 1)
+.br
+\fB11\fR: SIGSEGV (Segmentation fault)
+.br
+\fB12\fR: SIGUSR2 (User-defined signal 2)
+.br
+\fB15\fR: SIGTERM (Termination)
+.br
+\fB18\fR: SIGCONT (Continue)
+.br
+\fB19\fR: SIGSTOP (Stop)
+.br
+\fB20\fR: SIGTSTP (Terminal stop)
+
+.SH EXAMPLES
+Send SIGTERM (termination) signal to a user process with PID 1234:
+.B user
+.B 1234 15
+Send SIGKILL (kill) signal to a system process with PID 5678:
+.B system
+.B 5678 9

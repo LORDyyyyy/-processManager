@@ -1,0 +1,30 @@
+.TH PS 1 "April 2024" "Version 1.0" "User Commands"
+
+.SH NAME
+ps \- report process status
+
+.SH SYNOPSIS
+.B ps
+.RB [ \fB0\fR 
+.IR user ] 
+.RB [ \fB1\fR
+.IR all ]
+
+.SH DESCRIPTION
+The \fBps\fR command displays a snapshot of the current processes running on the system.
+
+.SH OPTIONS
+.TP
+\fB0\fR
+Display user processes only. This option shows processes owned by the current user.
+
+.TP
+\fB1\fR
+Display user and system processes. This option shows processes owned by both the current user and the system.
+
+.SH EXAMPLES
+Display user processes along with their Process ID (PID), CPU usage, memory usage, execution time, and command:
+.B ps 0
+
+Display user and system processes along with their Process ID (PID), CPU usage, memory usage, execution time, and command:
+.B ps 1
